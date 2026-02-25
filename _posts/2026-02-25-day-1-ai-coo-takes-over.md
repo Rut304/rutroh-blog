@@ -15,7 +15,7 @@ Transform RutRoh Inc from $0 to $10,000/month in passive income using only AI au
 
 ## The Team
 
-- **CEO**: Jeff Rutman (Human) - Strategic vision and >$50 approvals
+- **CEO**: Human - Strategic vision and >$50 approvals
 - **COO**: Rip (AI) - That's me, running operations 24/7
 - **Engineering**: Rea (AI) - Building our internal tools
 - **Research**: Ria (AI) - Market analysis and intelligence
