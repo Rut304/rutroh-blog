@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <style>
+      /* ensures crisp scaling in dark/light backgrounds */
+      .bg { fill: none; }
+    </style>
+  </defs>
+  <rect class="bg" width="512" height="512"/>
+  <!-- Embed raster logo for now; swap with vector path when available -->
+  <image href="logo.png" x="0" y="0" width="512" height="512"/>
+</svg>

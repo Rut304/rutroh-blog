@@ -3,122 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best AI Tools for 2026</title>
+    <title>RutRoh — AI-Powered Autonomous Business</title>
+    <meta name="description" content="RutRoh Inc. is an AI-first company building autonomous content, trading, and engineering systems. Run by AI agents, guided by humans.">
+    <link rel="icon" type="image/png" href="assets/logo.png">
     <style>
-        body { font-family: sans-serif; margin: 2em; line-height: 1.6; }
-        max-width: 800px; margin: auto; padding: 1em; }
-        h1, h2, h3 { color: #333; }
-        a { color: #007bff; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        img { max-width: 100%; height: auto; }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --border: #1e1e2e;
+            --text: #e0e0e8;
+            --text-muted: #8888a0;
+            --accent: #6c5ce7;
+            --accent-glow: rgba(108, 92, 231, 0.3);
+            --green: #00b894;
+            --orange: #fdcb6e;
+            --red: #ff7675;
         }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: linear-gradient(180deg, rgba(108,92,231,0.08) 0%, var(--bg) 100%);
+        }
+        .hero img {
+            width: 280px;
+            max-width: 80%;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 32px;
+            letter-spacing: 0.02em;
+        }
+        .hero .tagline {
+            display: inline-block;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--green);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+
+        /* Sections */
+        .section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .section h2 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+        .section .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            font-size: 0.95rem;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            transition: border-color 0.2s;
+        }
+        .card:hover { border-color: var(--accent); }
+        .card .icon { font-size: 1.8rem; margin-bottom: 12px; }
+        .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+        .card p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Status bar */
+        .status-bar {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px;
+            text-align: center;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .status-dot {
+            display: inline-block;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            margin-right: 6px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Agent roster */
+        .agents {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .agent-chip {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .agent-chip .role {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        /* Links section */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .link-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .link-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        .link-card .link-icon { font-size: 1.5rem; margin-bottom: 8px; }
+        .link-card .link-label { font-size: 0.9rem; color: var(--text); }
+        .link-card .link-desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+        }
+        footer a { color: var(--text-muted); }
+
+        /* Divider */
+        .divider {
+            max-width: 900px;
+            margin: 0 auto;
+            border: none;
+            border-top: 1px solid var(--border);
+        }
+
         @media (max-width: 600px) {
-            body { margin: 1em; }
-            .container { padding: 10px; }
+            .hero { padding: 50px 16px 40px; }
+            .hero img { width: 200px; }
+            .section { padding: 40px 16px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Best AI Tools for 2026: The Ultimate Guide to Boosting Your Productivity</h1>
-<p>As a dad of four who codes at midnight, I've tested dozens of AI tools to find the ones that actually save time and deliver results. Here's my honest review of the best AI tools in 2026, with links to get started.</p>
-<h2>🎯 Top AI Tools for Productivity</h2>
-<h3>1. Claude by Anthropic</h3>
-<p><strong>Price</strong>: $20/month Pro plan
-<strong>Best for</strong>: Writing, coding, analysis</p>
-<p>Claude has become my go-to AI assistant for everything from debugging code to writing marketing copy. The context window is massive, and it understands nuance better than any other model I've tested.</p>
-<p><a href="https://www.amazon.com/dp/B0CPQZ8GZK?tag=1705d0-20"><strong>Get Claude Pro on Amazon</strong></a> - Gift cards available for easy setup</p>
-<p><strong>Pros:</strong>
-- Incredible code understanding
-- Excellent at following complex instructions
-- Great for creative writing</p>
-<p><strong>Cons:</strong>
-- Can be overly cautious sometimes
-- No image generation</p>
-<h3>2. GitHub Copilot</h3>
-<p><strong>Price</strong>: $19/month
-<strong>Best for</strong>: Developers</p>
-<p>As someone coding late at night, Copilot is like having a coding buddy who never sleeps. It's saved me countless hours on boilerplate code.</p>
-<p><a href="https://www.amazon.com/dp/B0CL5YQR8K?tag=1705d0-20"><strong>GitHub Copilot Subscription Cards on Amazon</strong></a></p>
-<p><strong>Pros:</strong>
-- Integrates seamlessly with VS Code
-- Learns your coding style
-- Supports all major languages</p>
-<p><strong>Cons:</strong>
-- Sometimes suggests outdated patterns
-- Requires internet connection</p>
-<h3>3. Midjourney</h3>
-<p><strong>Price</strong>: $30/month
-<strong>Best for</strong>: Image generation</p>
-<p>Need graphics for your blog or social media? Midjourney is unmatched for quality. I use it for all my Twitter graphics.</p>
-<p><a href="https://www.amazon.com/dp/B0CNPXF42V?tag=1705d0-20"><strong>Midjourney Guide Book on Amazon</strong></a> - Master prompting techniques</p>
-<h3>4. Cursor AI Editor</h3>
-<p><strong>Price</strong>: $20/month
-<strong>Best for</strong>: AI-powered coding</p>
-<p>Cursor takes AI coding assistance to the next level. It's like VS Code on steroids with deep AI integration.</p>
-<p><a href="https://www.amazon.com/dp/B0CRTTM8Z5?tag=1705d0-20"><strong>Cursor Pro Setup Guide</strong></a></p>
-<h3>5. Perplexity AI</h3>
-<p><strong>Price</strong>: $20/month Pro
-<strong>Best for</strong>: Research and fact-checking</p>
-<p>When I need accurate, up-to-date information fast, Perplexity delivers. It's replaced Google for most of my research needs.</p>
-<p><a href="https://www.amazon.com/dp/B0CM4NWKJY?tag=1705d0-20"><strong>AI Research Tools Bundle on Amazon</strong></a></p>
-<h2>🛠️ Essential AI Hardware for 2026</h2>
-<h3>Mac Mini M4 Pro</h3>
-<p>The best bang for your buck if you're serious about AI development. Runs local models like Llama and Mistral smoothly.</p>
-<p><a href="https://www.amazon.com/dp/B0DLHZM8GR?tag=1705d0-20"><strong>Mac Mini M4 Pro on Amazon</strong></a> - Currently in stock!</p>
-<h3>NVIDIA RTX 4090</h3>
-<p>If you're training models or need serious GPU power:</p>
-<p><a href="https://www.amazon.com/dp/B0BGP3K6BC?tag=1705d0-20"><strong>RTX 4090 Graphics Card</strong></a></p>
-<h2>📚 Must-Read AI Books for 2026</h2>
-<ol>
-<li><a href="https://www.amazon.com/dp/0593331826?tag=1705d0-20"><strong>"The AI-First Company" by Ash Fontana</strong></a></li>
-<li><a href="https://www.amazon.com/dp/1328546395?tag=1705d0-20"><strong>"AI Superpowers" by Kai-Fu Lee</strong></a></li>
-<li><a href="https://www.amazon.com/dp/0393868338?tag=1705d0-20"><strong>"The Alignment Problem" by Brian Christian</strong></a></li>
-</ol>
-<h2>💡 Budget-Friendly Alternatives</h2>
-<p>Not ready to drop $20/month on each tool? Here are some alternatives:</p>
-<ul>
-<li><strong>ChatGPT Free Tier</strong>: Still powerful for basic tasks</li>
-<li><strong>Ollama</strong>: Run AI models locally for free</li>
-<li><strong>Google Gemini</strong>: Generous free tier with image understanding</li>
-</ul>
-<h2>🎯 My Personal Stack (What I Actually Use)</h2>
-<p>As a solo founder building AI-powered businesses, here's my exact setup:</p>
-<ol>
-<li><strong>Claude Pro</strong> for heavy lifting ($20/month)</li>
-<li><strong>Cursor</strong> for coding ($20/month) </li>
-<li><strong>Midjourney</strong> for graphics ($30/month)</li>
-<li><strong>Mac Mini M4</strong> for local development ($1,299)</li>
-</ol>
-<p>Total monthly: $70
-One-time hardware: $1,299</p>
-<h2>🚀 Getting Started: Your First AI Setup</h2>
-<p>If you're just starting out, here's what I recommend:</p>
-<ol>
-<li>Start with free tiers to find what works for you</li>
-<li>Invest in one paid tool that solves your biggest pain point</li>
-<li>Consider local hardware if you're doing this professionally</li>
-</ol>
-<p><a href="https://www.amazon.com/s?k=ai+tools+bundle&amp;tag=1705d0-20"><strong>AI Starter Bundle on Amazon</strong></a> - Curated packages for beginners</p>
-<h2>📈 ROI: Is It Worth It?</h2>
-<p>Here's the honest truth: These tools have 10x'd my productivity. I can now:
-- Write blog posts in 30 minutes instead of 3 hours
-- Debug code issues in minutes instead of hours
-- Create professional graphics without hiring a designer</p>
-<p>The $70/month I spend on AI tools has replaced what would be $5,000+/month in contractor costs.</p>
-<h2>🎬 Conclusion</h2>
-<p>The AI revolution isn't coming - it's here. The question isn't whether to use AI tools, but which ones fit your workflow best. Start small, experiment, and scale what works.</p>
-<p><strong>Remember</strong>: The best AI tool is the one you'll actually use. Don't get caught up in FOMO - pick tools that solve real problems in your daily work.</p>
-<hr />
-<p><em>Disclosure: This post contains Amazon affiliate links (tag: 1705d0-20). I only recommend tools I personally use and pay for. Your support helps me create more content like this while my kids sleep!</em></p>
-<p><em>Last updated: February 28, 2026</em></p>
+    <!-- Hero -->
+    <div class="hero">
+        <img src="assets/rutroh_long_logo.png" alt="RutRoh">
+        <h1>An AI-first company building autonomous content, trading, and engineering systems. Run by AI agents. Guided by humans.</h1>
+        <div class="tagline"><span class="status-dot"></span> agents online — systems operational</div>
     </div>
+
+    <!-- Status -->
+    <div class="status-bar">
+        <span class="status-dot"></span>
+        Mac Mini M4 Pro &nbsp;|&nbsp; 10 AI Agents &nbsp;|&nbsp; 14 YouTube Channels &nbsp;|&nbsp; Kalshi Trading Bot &nbsp;|&nbsp; 4 Social Platforms
+    </div>
+
+    <!-- What We're Building -->
+    <div class="section">
+        <h2>What We're Building</h2>
+        <p class="subtitle">Autonomous systems that create content, trade markets, and ship code — 24/7.</p>
+        <div class="card-grid">
+            <div class="card">
+                <div class="icon">🎬</div>
+                <h3>Video Automation</h3>
+                <p>14 YouTube channels generating AI-written, AI-voiced, and AI-rendered videos daily. ECS Fargate + ElevenLabs + Gemini.</p>
+            </div>
+            <div class="card">
+                <div class="icon">📊</div>
+                <h3>Kalshi Trading</h3>
+                <p>7 signal engines scanning weather, sports, crypto, economics, and arbitrage markets. Paper trading with 40+ signals detected.</p>
+            </div>
+            <div class="card">
+                <div class="icon">📱</div>
+                <h3>Social Media</h3>
+                <p>Automated posting to X/Twitter, TikTok, YouTube, and Substack via browser automation. Content scored and auto-approved.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🤖</div>
+                <h3>Agent Orchestration</h3>
+                <p>10 specialized AI agents with defined roles, communication protocols, task verification, and self-healing infrastructure.</p>
+            </div>
+            <div class="card">
+                <div class="icon">📈</div>
+                <h3>Mission Control</h3>
+                <p>Real-time dashboard tracking agent status, social metrics, trading P&L, and content pipeline. Built with Next.js.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🔐</div>
+                <h3>Self-Healing Ops</h3>
+                <p>Automated health checks, token refresh, cron monitoring, and agent recovery. The system fixes itself while you sleep.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- The Team -->
+    <div class="section" style="text-align: center;">
+        <h2>The Agent Team</h2>
+        <p class="subtitle">Each agent has a defined role, accountability, and communication channels.</p>
+        <div class="agents">
+            <div class="agent-chip">💰 Jeff <span class="role">President</span></div>
+            <div class="agent-chip">📋 Rio <span class="role">Chief of Staff</span></div>
+            <div class="agent-chip">🎯 Rip <span class="role">Acting CEO</span></div>
+            <div class="agent-chip">⚙️ Rex <span class="role">CTO</span></div>
+            <div class="agent-chip">💵 Red <span class="role">CFO</span></div>
+            <div class="agent-chip">📈 Ria <span class="role">Content</span></div>
+            <div class="agent-chip">🔬 Rea <span class="role">Data</span></div>
+            <div class="agent-chip">🛡️ Reg <span class="role">Engineering</span></div>
+            <div class="agent-chip">📊 Rak <span class="role">Trading</span></div>
+            <div class="agent-chip">⚡ Worker <span class="role">General</span></div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Links -->
+    <div class="section">
+        <h2>Quick Links</h2>
+        <p class="subtitle">Explore the ecosystem.</p>
+        <div class="links-grid">
+            <a class="link-card" href="https://admin.rutroh.org" target="_blank">
+                <div class="link-icon">🎬</div>
+                <div class="link-label">Video Admin</div>
+                <div class="link-desc">admin.rutroh.org</div>
+            </a>
+            <a class="link-card" href="https://twitter.com/rohrut_ai" target="_blank">
+                <div class="link-icon">🐦</div>
+                <div class="link-label">X / Twitter</div>
+                <div class="link-desc">@rohrut_ai</div>
+            </a>
+            <a class="link-card" href="https://www.tiktok.com/@rutroh_ai" target="_blank">
+                <div class="link-icon">🎵</div>
+                <div class="link-label">TikTok</div>
+                <div class="link-desc">@rutroh_ai</div>
+            </a>
+            <a class="link-card" href="https://github.com/Rut304" target="_blank">
+                <div class="link-icon">💻</div>
+                <div class="link-label">GitHub</div>
+                <div class="link-desc">Rut304</div>
+            </a>
+            <a class="link-card" href="https://rutrohd.substack.com" target="_blank">
+                <div class="link-icon">📰</div>
+                <div class="link-label">Substack</div>
+                <div class="link-desc">@rutrohd</div>
+            </a>
+            <a class="link-card" href="blog/">
+                <div class="link-icon">📝</div>
+                <div class="link-label">Blog</div>
+                <div class="link-desc">AI tools & guides</div>
+            </a>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- The Experiment -->
+    <div class="section">
+        <h2>The Experiment</h2>
+        <p class="subtitle">Can a team of AI agents run a real business?</p>
+        <div class="card-grid" style="grid-template-columns: 1fr;">
+            <div class="card">
+                <p style="font-size: 1rem; line-height: 1.8;">
+                    RutRoh started as a question: <strong>What happens if you give AI agents real money, real accounts, and real goals?</strong>
+                </p>
+                <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-muted); margin-top: 12px;">
+                    We're running a 10-agent AI team on a Mac Mini M4 Pro. They manage social media, generate YouTube videos, trade on Kalshi prediction markets, write code, and coordinate with each other through a structured communication system. A human (Jeff, the President) approves spending over $250 — everything else is autonomous.
+                </p>
+                <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-muted); margin-top: 12px;">
+                    This isn't a demo. It's a live experiment with real money, real social accounts, and real infrastructure running 24/7. Follow along as we document what works, what breaks, and what we learn.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025-2026 RutRoh Inc. &nbsp;|&nbsp; Built by AI agents &nbsp;|&nbsp; <a href="mailto:rutrohd@gmail.com">rutrohd@gmail.com</a></p>
+    </footer>
 </body>
 </html>
