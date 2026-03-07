@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RutRoh — AI-Powered Autonomous Business</title>
-    <meta name="description" content="RutRoh Inc. is an AI-first company building autonomous content, trading, and engineering systems. Run by AI agents, guided by humans.">
+    <meta name="description"
+        content="RutRoh Inc. is an AI-first company building autonomous content, trading, and engineering systems. Run by AI agents, guided by humans.">
     <link rel="icon" type="image/png" href="assets/logo.png">
     <style>
         :root {
@@ -19,27 +21,42 @@
             --orange: #fdcb6e;
             --red: #ff7675;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
         }
-        a { color: var(--accent); text-decoration: none; }
-        a:hover { text-decoration: underline; }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
 
         /* Hero */
         .hero {
             text-align: center;
             padding: 80px 20px 60px;
-            background: linear-gradient(180deg, rgba(108,92,231,0.08) 0%, var(--bg) 100%);
+            background: linear-gradient(180deg, rgba(108, 92, 231, 0.08) 0%, var(--bg) 100%);
         }
+
         .hero img {
             width: 280px;
             max-width: 80%;
             margin-bottom: 24px;
         }
+
         .hero h1 {
             font-size: 1.3rem;
             font-weight: 400;
@@ -48,6 +65,7 @@
             margin: 0 auto 32px;
             letter-spacing: 0.02em;
         }
+
         .hero .tagline {
             display: inline-block;
             background: var(--surface);
@@ -65,11 +83,13 @@
             margin: 0 auto;
             padding: 60px 20px;
         }
+
         .section h2 {
             font-size: 1.6rem;
             margin-bottom: 12px;
             color: var(--text);
         }
+
         .section .subtitle {
             color: var(--text-muted);
             margin-bottom: 36px;
@@ -82,6 +102,7 @@
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
         }
+
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -89,10 +110,25 @@
             padding: 28px;
             transition: border-color 0.2s;
         }
-        .card:hover { border-color: var(--accent); }
-        .card .icon { font-size: 1.8rem; margin-bottom: 12px; }
-        .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
-        .card p { color: var(--text-muted); font-size: 0.9rem; }
+
+        .card:hover {
+            border-color: var(--accent);
+        }
+
+        .card .icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
 
         /* Status bar */
         .status-bar {
@@ -105,17 +141,27 @@
             font-size: 0.8rem;
             color: var(--text-muted);
         }
+
         .status-dot {
             display: inline-block;
-            width: 8px; height: 8px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: var(--green);
             margin-right: 6px;
             animation: pulse 2s infinite;
         }
+
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
         }
 
         /* Agent roster */
@@ -125,6 +171,7 @@
             gap: 12px;
             justify-content: center;
         }
+
         .agent-chip {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -135,6 +182,7 @@
             align-items: center;
             gap: 8px;
         }
+
         .agent-chip .role {
             color: var(--text-muted);
             font-size: 0.75rem;
@@ -146,6 +194,7 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 16px;
         }
+
         .link-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -154,14 +203,28 @@
             text-align: center;
             transition: border-color 0.2s, transform 0.2s;
         }
+
         .link-card:hover {
             border-color: var(--accent);
             transform: translateY(-2px);
             text-decoration: none;
         }
-        .link-card .link-icon { font-size: 1.5rem; margin-bottom: 8px; }
-        .link-card .link-label { font-size: 0.9rem; color: var(--text); }
-        .link-card .link-desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+
+        .link-card .link-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .link-card .link-label {
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .link-card .link-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
 
         /* Footer */
         footer {
@@ -171,7 +234,10 @@
             font-size: 0.8rem;
             border-top: 1px solid var(--border);
         }
-        footer a { color: var(--text-muted); }
+
+        footer a {
+            color: var(--text-muted);
+        }
 
         /* Divider */
         .divider {
@@ -182,9 +248,17 @@
         }
 
         @media (max-width: 600px) {
-            .hero { padding: 50px 16px 40px; }
-            .hero img { width: 200px; }
-            .section { padding: 40px 16px; }
+            .hero {
+                padding: 50px 16px 40px;
+            }
+
+            .hero img {
+                width: 200px;
+            }
+
+            .section {
+                padding: 40px 16px;
+            }
         }
 
         /* Top nav */
@@ -196,13 +270,18 @@
             padding: 14px 24px;
             border-bottom: 1px solid var(--border);
         }
+
         .top-nav a {
             color: var(--text-muted);
             font-size: 0.9rem;
             text-decoration: none;
             transition: color 0.2s;
         }
-        .top-nav a:hover { color: var(--accent); }
+
+        .top-nav a:hover {
+            color: var(--accent);
+        }
+
         .top-nav .blog-btn {
             background: var(--accent);
             color: #fff;
@@ -211,6 +290,7 @@
             font-weight: 600;
             font-size: 0.9rem;
         }
+
         .top-nav .blog-btn:hover {
             background: #5a4bd4;
             color: #fff;
@@ -222,6 +302,7 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 16px;
         }
+
         .latest-post {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -231,16 +312,32 @@
             text-decoration: none;
             display: block;
         }
+
         .latest-post:hover {
             border-color: var(--accent);
             transform: translateY(-2px);
             text-decoration: none;
         }
-        .latest-post h3 { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
-        .latest-post .post-date { font-size: 0.75rem; color: var(--text-muted); }
-        .latest-post .post-desc { font-size: 0.85rem; color: var(--text-muted); margin-top: 8px; }
+
+        .latest-post h3 {
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .latest-post .post-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .latest-post .post-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
     </style>
 </head>
+
 <body>
     <!-- Top Navigation -->
     <nav class="top-nav">
@@ -253,14 +350,16 @@
     <!-- Hero -->
     <div class="hero">
         <img src="assets/rutroh_long_logo.png" alt="RutRoh">
-        <h1>An AI-first company building autonomous content, trading, and engineering systems. Run by AI agents. Guided by humans.</h1>
+        <h1>An AI-first company building autonomous content, trading, and engineering systems. Run by AI agents. Guided
+            by humans.</h1>
         <div class="tagline"><span class="status-dot"></span> agents online — systems operational</div>
     </div>
 
     <!-- Status -->
     <div class="status-bar">
         <span class="status-dot"></span>
-        Mac Mini M4 Pro &nbsp;|&nbsp; 10 AI Agents &nbsp;|&nbsp; 14 YouTube Channels &nbsp;|&nbsp; Kalshi Trading Bot &nbsp;|&nbsp; 4 Social Platforms
+        Mac Mini M4 Pro &nbsp;|&nbsp; 10 AI Agents &nbsp;|&nbsp; 14 YouTube Channels &nbsp;|&nbsp; Kalshi Trading Bot
+        &nbsp;|&nbsp; 4 Social Platforms
     </div>
 
     <!-- Latest Posts -->
@@ -271,12 +370,14 @@
             <a class="latest-post" href="blog/cost-of-running-ai-automated-business.html">
                 <h3>What I Actually Spend Running an AI-Automated Business</h3>
                 <span class="post-date">March 7, 2026</span>
-                <p class="post-desc">A real breakdown of every dollar that goes into running an AI-automated business from a Mac Mini.</p>
+                <p class="post-desc">A real breakdown of every dollar that goes into running an AI-automated business
+                    from a Mac Mini.</p>
             </a>
             <a class="latest-post" href="blog/home-office-setup-for-ai-developers.html">
                 <h3>My Actual Home Office Setup for Running Local AI Models</h3>
                 <span class="post-date">March 7, 2026</span>
-                <p class="post-desc">The gear I actually use every day for running LLMs locally — and the stuff I returned.</p>
+                <p class="post-desc">The gear I actually use every day for running LLMs locally — and the stuff I
+                    returned.</p>
             </a>
         </div>
         <p style="text-align: center; margin-top: 20px;">
@@ -292,32 +393,38 @@
             <div class="card">
                 <div class="icon">🎬</div>
                 <h3>Video Automation</h3>
-                <p>14 YouTube channels generating AI-written, AI-voiced, and AI-rendered videos daily. ECS Fargate + ElevenLabs + Gemini.</p>
+                <p>14 YouTube channels generating AI-written, AI-voiced, and AI-rendered videos daily. ECS Fargate +
+                    ElevenLabs + Gemini.</p>
             </div>
             <div class="card">
                 <div class="icon">📊</div>
                 <h3>Kalshi Trading</h3>
-                <p>7 signal engines scanning weather, sports, crypto, economics, and arbitrage markets. Paper trading with 40+ signals detected.</p>
+                <p>7 signal engines scanning weather, sports, crypto, economics, and arbitrage markets. Paper trading
+                    with 40+ signals detected.</p>
             </div>
             <div class="card">
                 <div class="icon">📱</div>
                 <h3>Social Media</h3>
-                <p>Automated posting to X/Twitter, TikTok, YouTube, and Substack via browser automation. Content scored and auto-approved.</p>
+                <p>Automated posting to X/Twitter, TikTok, YouTube, and Substack via browser automation. Content scored
+                    and auto-approved.</p>
             </div>
             <div class="card">
                 <div class="icon">🤖</div>
                 <h3>Agent Orchestration</h3>
-                <p>10 specialized AI agents with defined roles, communication protocols, task verification, and self-healing infrastructure.</p>
+                <p>10 specialized AI agents with defined roles, communication protocols, task verification, and
+                    self-healing infrastructure.</p>
             </div>
             <div class="card">
                 <div class="icon">📈</div>
                 <h3>Mission Control</h3>
-                <p>Real-time dashboard tracking agent status, social metrics, trading P&L, and content pipeline. Built with Next.js.</p>
+                <p>Real-time dashboard tracking agent status, social metrics, trading P&L, and content pipeline. Built
+                    with Next.js.</p>
             </div>
             <div class="card">
                 <div class="icon">🔐</div>
                 <h3>Self-Healing Ops</h3>
-                <p>Automated health checks, token refresh, cron monitoring, and agent recovery. The system fixes itself while you sleep.</p>
+                <p>Automated health checks, token refresh, cron monitoring, and agent recovery. The system fixes itself
+                    while you sleep.</p>
             </div>
         </div>
     </div>
@@ -391,13 +498,18 @@
         <div class="card-grid" style="grid-template-columns: 1fr;">
             <div class="card">
                 <p style="font-size: 1rem; line-height: 1.8;">
-                    RutRoh started as a question: <strong>What happens if you give AI agents real money, real accounts, and real goals?</strong>
+                    RutRoh started as a question: <strong>What happens if you give AI agents real money, real accounts,
+                        and real goals?</strong>
                 </p>
                 <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-muted); margin-top: 12px;">
-                    We're running a 10-agent AI team on a Mac Mini M4 Pro. They manage social media, generate YouTube videos, trade on Kalshi prediction markets, write code, and coordinate with each other through a structured communication system. A human (Jeff, the President) approves spending over $250 — everything else is autonomous.
+                    We're running a 10-agent AI team on a Mac Mini M4 Pro. They manage social media, generate YouTube
+                    videos, trade on Kalshi prediction markets, write code, and coordinate with each other through a
+                    structured communication system. A human (Jeff, the President) approves spending over $250 —
+                    everything else is autonomous.
                 </p>
                 <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-muted); margin-top: 12px;">
-                    This isn't a demo. It's a live experiment with real money, real social accounts, and real infrastructure running 24/7. Follow along as we document what works, what breaks, and what we learn.
+                    This isn't a demo. It's a live experiment with real money, real social accounts, and real
+                    infrastructure running 24/7. Follow along as we document what works, what breaks, and what we learn.
                 </p>
             </div>
         </div>
@@ -405,7 +517,9 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025-2026 RutRoh Inc. &nbsp;|&nbsp; Built by AI agents &nbsp;|&nbsp; <a href="mailto:rutrohd@gmail.com">rutrohd@gmail.com</a></p>
+        <p>&copy; 2025-2026 RutRoh Inc. &nbsp;|&nbsp; Built by AI agents &nbsp;|&nbsp; <a
+                href="mailto:rutrohd@gmail.com">rutrohd@gmail.com</a></p>
     </footer>
 </body>
+
 </html>
