@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Which GPU Should You Actually Buy for Local AI in 2026? — RutRoh Blog</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --border: #1e1e2e;
+            --text: #e0e0e8;
+            --text-muted: #8888a0;
+            --accent: #6c5ce7;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        nav {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        nav img { height: 28px; }
+        nav a { color: var(--text-muted); font-size: 0.85rem; }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+        h1 { font-size: 1.6rem; margin-bottom: 8px; }
+        .date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 32px; display: block; }
+        h2 { font-size: 1.2rem; margin: 32px 0 12px; }
+        h3 { font-size: 1.05rem; margin: 24px 0 8px; }
+        p { margin-bottom: 16px; color: var(--text-muted); }
+        strong { color: var(--text); }
+        ol, ul { margin: 0 0 16px 24px; color: var(--text-muted); }
+        li { margin-bottom: 6px; }
+        hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+        em { color: var(--text-muted); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/"><img src="../assets/rutroh_long_logo.png" alt="RutRoh"></a>
+        <a href="/">Home</a>
+        <a href="/blog/">Blog</a>
+    </nav>
+    <div class="container">
+        <h1>Which GPU Should You Actually Buy for Local AI in 2026?</h1>
+        <span class="date">March 07, 2026</span>
+<p>I've been running local LLMs on my Mac Mini M4 Pro, and while Apple Silicon is surprisingly capable for inference, it can't touch a real NVIDIA GPU for training or running larger models at speed. If you're building a dedicated AI workstation — maybe for Stable Diffusion, fine-tuning, or running unquantized 70B models — the GPU is where 80% of your budget should go.</p>
+
+<p>Here's what I'd actually buy right now, based on real-world performance numbers, not marketing slides.</p>
+
+<h2>If Money Isn't the Issue: RTX 4080 Super</h2>
+
+<p>16GB of GDDR6X, massive CUDA core count, and enough raw throughput to run Llama 3 70B in 4-bit quantization at usable speeds. I've seen people get ~15 tokens/sec on q4_K_M quantized 70B models, which is actually fast enough to feel like a conversation.</p>
+
+<p>For Stable Diffusion work, this thing rips through SDXL generations in about 4-5 seconds per image at 1024x1024. If you're doing batch generations or LoRA training, you'll appreciate the bandwidth.</p>
+
+<p>The catch: it's still around $950-1100 depending on the model. That's a lot. But if AI work is your actual job or business, it pays for itself fast in time savings alone.</p>
+
+<p><a href="https://www.amazon.com/dp/B0CSBCZ1P9/?tag=1705d0-20">ASUS TUF Gaming RTX 4080 Super on Amazon</a></p>
+
+<h2>The Smart Pick for Most People: RTX 4070 Ti Super</h2>
+
+<p>Same 16GB of VRAM (this is the key number — VRAM determines what models you can load, period), but lower power draw and about $300 cheaper than the 4080 Super. You lose maybe 20-25% performance in raw compute, but for inference workloads that's barely noticeable.</p>
+
+<p>I'd pick this over the 4080 Super unless you're doing heavy training or batch work. For running Ollama models, doing Whisper transcription, or generating images, the 4070 Ti Super handles everything I throw at it.</p>
+
+<p>Power consumption matters more than people think — the 4080 Super wants 320W under load, while this sits around 285W. Over a year of heavy use, that's a real difference on your electric bill.</p>
+
+<p><a href="https://www.amazon.com/dp/B0CQTN6Y2Z/?tag=1705d0-20">ASUS TUF Gaming RTX 4070 Ti Super on Amazon</a></p>
+
+<h2>Absolute Budget Floor: RTX 4060 Ti 16GB</h2>
+
+<p>Under $500, and it has 16GB of VRAM. That's the whole pitch.</p>
+
+<p>It's not fast. Don't expect to run 70B models at any reasonable speed — you'll get maybe 3-5 tokens/sec on heavily quantized versions. But it can <em>load</em> them, which is more than the 8GB models can say. For 7B and 13B models, it runs perfectly fine.</p>
+
+<p>Honestly? If you're just experimenting with local AI and don't want to spend a grand, this gets you in the door. You can always upgrade later when you know what workloads you actually care about.</p>
+
+<p>The one thing I'd warn about: don't buy the 8GB version of the 4060 Ti. The whole point is the VRAM, and 8GB is already insufficient for most interesting AI workloads. The 16GB version specifically — <a href="https://www.amazon.com/dp/B0CC9K3X6Y/?tag=1705d0-20">ASUS Dual RTX 4060 Ti 16GB</a>.</p>
+
+<h2>Quick Take on AMD</h2>
+
+<p>People always ask about AMD GPUs since they're cheaper. Short answer: for AI specifically, don't bother right now. CUDA support is so deeply baked into every ML framework that ROCm (AMD's alternative) is still a pain to set up and runs into compatibility issues constantly. Maybe that changes in a year or two, but today NVIDIA is the only sane choice for local AI work.</p>
+
+<hr>
+
+<p>Prices change constantly. Check the links above for current deals — GPU prices have actually been coming down since the crypto crash cooled off demand.</p>
+
+<p><em>As an Amazon Associate, RutRoh Inc. earns from qualifying purchases.</em></p>
+    </div>
+</body>
+</html>

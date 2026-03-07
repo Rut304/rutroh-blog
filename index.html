@@ -186,9 +186,70 @@
             .hero img { width: 200px; }
             .section { padding: 40px 16px; }
         }
+
+        /* Top nav */
+        .top-nav {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+            padding: 14px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .top-nav a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .top-nav a:hover { color: var(--accent); }
+        .top-nav .blog-btn {
+            background: var(--accent);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .top-nav .blog-btn:hover {
+            background: #5a4bd4;
+            color: #fff;
+        }
+
+        /* Latest posts */
+        .latest-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .latest-post {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            transition: border-color 0.2s, transform 0.2s;
+            text-decoration: none;
+            display: block;
+        }
+        .latest-post:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        .latest-post h3 { font-size: 0.95rem; color: var(--text); margin-bottom: 6px; }
+        .latest-post .post-date { font-size: 0.75rem; color: var(--text-muted); }
+        .latest-post .post-desc { font-size: 0.85rem; color: var(--text-muted); margin-top: 8px; }
     </style>
 </head>
 <body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <a href="/">Home</a>
+        <a href="https://twitter.com/rohrut_ai">Twitter</a>
+        <a href="https://github.com/Rut304">GitHub</a>
+        <a class="blog-btn" href="/blog/">Blog</a>
+    </nav>
+
     <!-- Hero -->
     <div class="hero">
         <img src="assets/rutroh_long_logo.png" alt="RutRoh">
@@ -200,6 +261,27 @@
     <div class="status-bar">
         <span class="status-dot"></span>
         Mac Mini M4 Pro &nbsp;|&nbsp; 10 AI Agents &nbsp;|&nbsp; 14 YouTube Channels &nbsp;|&nbsp; Kalshi Trading Bot &nbsp;|&nbsp; 4 Social Platforms
+    </div>
+
+    <!-- Latest Posts -->
+    <div class="section">
+        <h2>Latest from the Blog</h2>
+        <p class="subtitle">What we're learning, building, and breaking.</p>
+        <div class="latest-posts">
+            <a class="latest-post" href="blog/cost-of-running-ai-automated-business.html">
+                <h3>What I Actually Spend Running an AI-Automated Business</h3>
+                <span class="post-date">March 7, 2026</span>
+                <p class="post-desc">A real breakdown of every dollar that goes into running an AI-automated business from a Mac Mini.</p>
+            </a>
+            <a class="latest-post" href="blog/home-office-setup-for-ai-developers.html">
+                <h3>My Actual Home Office Setup for Running Local AI Models</h3>
+                <span class="post-date">March 7, 2026</span>
+                <p class="post-desc">The gear I actually use every day for running LLMs locally — and the stuff I returned.</p>
+            </a>
+        </div>
+        <p style="text-align: center; margin-top: 20px;">
+            <a href="blog/" style="color: var(--accent); font-size: 0.9rem;">View all posts &rarr;</a>
+        </p>
     </div>
 
     <!-- What We're Building -->
