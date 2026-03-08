@@ -1,525 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RutRoh — AI-Powered Autonomous Business</title>
-    <meta name="description"
-        content="RutRoh Inc. is an AI-first company building autonomous content, trading, and engineering systems. Run by AI agents, guided by humans.">
+    <meta name="description" content="RutRoh Inc. is an AI-first company building autonomous content, trading, and engineering systems. Run by AI agents, guided by humans.">
     <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="assets/style.css">
     <style>
-        :root {
-            --bg: #0a0a0f;
-            --surface: #12121a;
-            --border: #1e1e2e;
-            --text: #e0e0e8;
-            --text-muted: #8888a0;
-            --accent: #6c5ce7;
-            --accent-glow: rgba(108, 92, 231, 0.3);
-            --green: #00b894;
-            --orange: #fdcb6e;
-            --red: #ff7675;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Hero */
-        .hero {
-            text-align: center;
-            padding: 80px 20px 60px;
-            background: linear-gradient(180deg, rgba(108, 92, 231, 0.08) 0%, var(--bg) 100%);
-        }
-
-        .hero img {
-            width: 280px;
-            max-width: 80%;
-            margin-bottom: 24px;
-        }
-
-        .hero h1 {
-            font-size: 1.3rem;
-            font-weight: 400;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto 32px;
-            letter-spacing: 0.02em;
-        }
-
-        .hero .tagline {
-            display: inline-block;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--green);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-family: 'SF Mono', 'Fira Code', monospace;
-        }
-
-        /* Sections */
-        .section {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        .section h2 {
-            font-size: 1.6rem;
-            margin-bottom: 12px;
-            color: var(--text);
-        }
-
-        .section .subtitle {
-            color: var(--text-muted);
-            margin-bottom: 36px;
-            font-size: 0.95rem;
-        }
-
-        /* Cards */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 28px;
-            transition: border-color 0.2s;
-        }
-
-        .card:hover {
-            border-color: var(--accent);
-        }
-
-        .card .icon {
-            font-size: 1.8rem;
-            margin-bottom: 12px;
-        }
-
-        .card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Status bar */
-        .status-bar {
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 20px;
-            text-align: center;
-            font-family: 'SF Mono', 'Fira Code', monospace;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .status-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--green);
-            margin-right: 6px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.4;
-            }
-        }
-
-        /* Agent roster */
-        .agents {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-        }
-
+        .agent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
         .agent-chip {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 10px 16px;
-            font-size: 0.85rem;
+            border-radius: 10px;
+            padding: 14px 16px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            transition: border-color 0.2s;
         }
-
-        .agent-chip .role {
-            color: var(--text-muted);
-            font-size: 0.75rem;
-        }
-
-        /* Links section */
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-        }
-
+        .agent-chip:hover { border-color: var(--border-hover); }
+        .agent-chip .emoji { font-size: 1.3rem; }
+        .agent-chip .info { display: flex; flex-direction: column; }
+        .agent-chip .name { font-weight: 600; font-size: 0.85rem; }
+        .agent-chip .role { color: var(--text-muted); font-size: 0.72rem; }
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
         .link-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 20px;
+            border-radius: var(--radius);
+            padding: 20px 16px;
             text-align: center;
-            transition: border-color 0.2s, transform 0.2s;
-        }
-
-        .link-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-            text-decoration: none;
-        }
-
-        .link-card .link-icon {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
-
-        .link-card .link-label {
-            font-size: 0.9rem;
-            color: var(--text);
-        }
-
-        .link-card .link-desc {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            border-top: 1px solid var(--border);
-        }
-
-        footer a {
-            color: var(--text-muted);
-        }
-
-        /* Divider */
-        .divider {
-            max-width: 900px;
-            margin: 0 auto;
-            border: none;
-            border-top: 1px solid var(--border);
-        }
-
-        @media (max-width: 600px) {
-            .hero {
-                padding: 50px 16px 40px;
-            }
-
-            .hero img {
-                width: 200px;
-            }
-
-            .section {
-                padding: 40px 16px;
-            }
-        }
-
-        /* Top nav */
-        .top-nav {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 20px;
-            padding: 14px 24px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .top-nav a {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .top-nav a:hover {
-            color: var(--accent);
-        }
-
-        .top-nav .blog-btn {
-            background: var(--accent);
-            color: #fff;
-            padding: 8px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .top-nav .blog-btn:hover {
-            background: #5a4bd4;
-            color: #fff;
-        }
-
-        /* Latest posts */
-        .latest-posts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-        }
-
-        .latest-post {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 20px;
-            transition: border-color 0.2s, transform 0.2s;
+            transition: all 0.25s;
             text-decoration: none;
             display: block;
         }
-
-        .latest-post:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
+        .link-card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: var(--shadow-glow); text-decoration: none; }
+        .link-card .icon { font-size: 1.5rem; margin-bottom: 8px; display: block; }
+        .link-card .label { font-size: 0.85rem; color: var(--text); font-weight: 500; }
+        .link-card .desc { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+        .experiment-card {
+            background: var(--gradient-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+        }
+        .experiment-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 14px; }
+        .experiment-card p:last-child { margin-bottom: 0; }
+        .latest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+        .latest-card {
+            display: block;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
             text-decoration: none;
+            transition: all 0.25s;
         }
-
-        .latest-post h3 {
-            font-size: 0.95rem;
-            color: var(--text);
-            margin-bottom: 6px;
-        }
-
-        .latest-post .post-date {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .latest-post .post-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 8px;
-        }
+        .latest-card:hover { border-color: var(--border-hover); transform: translateX(4px); text-decoration: none; }
+        .latest-card h3 { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+        .latest-card .post-date { font-size: 0.72rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
+        .latest-card .post-desc { font-size: 0.82rem; color: var(--text-muted); margin-top: 6px; line-height: 1.4; }
     </style>
 </head>
-
 <body>
-    <!-- Top Navigation -->
-    <nav class="top-nav">
-        <a href="/">Home</a>
-        <a href="https://twitter.com/rohrut_ai">Twitter</a>
-        <a href="https://github.com/Rut304">GitHub</a>
-        <a class="blog-btn" href="/blog/">Blog</a>
+    <nav>
+        <a href="/" class="logo">
+            <img src="assets/rutroh_long_logo.png" alt="RutRoh">
+        </a>
+        <div class="nav-links">
+            <a href="/" class="active">Home</a>
+            <a href="/blog/">Blog</a>
+            <a href="https://twitter.com/rohrut_ai" target="_blank">X</a>
+            <a href="https://github.com/Rut304" target="_blank">GitHub</a>
+        </div>
     </nav>
 
-    <!-- Hero -->
     <div class="hero">
-        <img src="assets/rutroh_long_logo.png" alt="RutRoh">
-        <h1>An AI-first company building autonomous content, trading, and engineering systems. Run by AI agents. Guided
-            by humans.</h1>
-        <div class="tagline"><span class="status-dot"></span> agents online — systems operational</div>
+        <img class="logo-hero" src="assets/rutroh_long_logo.png" alt="RutRoh">
+        <h1>Autonomous AI Business</h1>
+        <p class="subtitle">8 AI agents running content, video, research, and revenue systems on a Mac Mini M4 Pro. 24/7. For real.</p>
+        <div class="badge">agents online &mdash; systems operational</div>
     </div>
 
-    <!-- Status -->
-    <div class="status-bar">
-        <span class="status-dot"></span>
-        Mac Mini M4 Pro &nbsp;|&nbsp; 10 AI Agents &nbsp;|&nbsp; 14 YouTube Channels &nbsp;|&nbsp; Kalshi Trading Bot
-        &nbsp;|&nbsp; 4 Social Platforms
-    </div>
-
-    <!-- Latest Posts -->
     <div class="section">
-        <h2>Latest from the Blog</h2>
-        <p class="subtitle">What we're learning, building, and breaking.</p>
-        <div class="latest-posts">
-            <a class="latest-post" href="blog/cost-of-running-ai-automated-business.html">
+        <div class="stats-row">
+            <div class="stat">
+                <div class="value">8</div>
+                <div class="label">AI Agents</div>
+            </div>
+            <div class="stat">
+                <div class="value">7+</div>
+                <div class="label">YouTube Channels</div>
+            </div>
+            <div class="stat">
+                <div class="value">18</div>
+                <div class="label">Phoebe Episodes</div>
+            </div>
+            <div class="stat">
+                <div class="value">24/7</div>
+                <div class="label">Uptime</div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="section">
+        <div class="section-header">
+            <h2>Latest from the Blog</h2>
+            <p>What we&#39;re learning, building, and breaking.</p>
+        </div>
+        <div class="latest-grid">
+            <a class="latest-card" href="blog/cost-of-running-ai-automated-business.html">
                 <h3>What I Actually Spend Running an AI-Automated Business</h3>
-                <span class="post-date">March 7, 2026</span>
-                <p class="post-desc">A real breakdown of every dollar that goes into running an AI-automated business
-                    from a Mac Mini.</p>
+                <span class="post-date">Mar 7, 2026</span>
+                <p class="post-desc">A real breakdown of every dollar that goes into running an AI business from a Mac Mini.</p>
             </a>
-            <a class="latest-post" href="blog/home-office-setup-for-ai-developers.html">
-                <h3>My Actual Home Office Setup for Running Local AI Models</h3>
-                <span class="post-date">March 7, 2026</span>
-                <p class="post-desc">The gear I actually use every day for running LLMs locally — and the stuff I
-                    returned.</p>
+            <a class="latest-card" href="blog/top-ai-affiliate-programs.html">
+                <h3>AI Affiliate Programs That Actually Pay</h3>
+                <span class="post-date">Mar 7, 2026</span>
+                <p class="post-desc">Which AI affiliate programs are worth your time and which ones are scams.</p>
             </a>
         </div>
-        <p style="text-align: center; margin-top: 20px;">
-            <a href="blog/" style="color: var(--accent); font-size: 0.9rem;">View all posts &rarr;</a>
-        </p>
+        <p style="text-align:center; margin-top:20px;"><a href="blog/" style="font-size:0.85rem;">View all posts &rarr;</a></p>
     </div>
 
-    <!-- What We're Building -->
+    <hr class="section-divider">
+
     <div class="section">
-        <h2>What We're Building</h2>
-        <p class="subtitle">Autonomous systems that create content, trade markets, and ship code — 24/7.</p>
+        <div class="section-header">
+            <h2>What We&#39;re Building</h2>
+            <p>Autonomous systems that create content, trade markets, and ship code.</p>
+        </div>
         <div class="card-grid">
             <div class="card">
-                <div class="icon">🎬</div>
+                <span class="icon">&#x1F3AC;</span>
                 <h3>Video Automation</h3>
-                <p>14 YouTube channels generating AI-written, AI-voiced, and AI-rendered videos daily. ECS Fargate +
-                    ElevenLabs + Gemini.</p>
+                <p>7+ YouTube channels generating AI-scripted, AI-voiced, and Remotion-rendered videos. Free-tier Gemini + edge-tts.</p>
+                <span class="status active">Active</span>
             </div>
             <div class="card">
-                <div class="icon">📊</div>
-                <h3>Kalshi Trading</h3>
-                <p>7 signal engines scanning weather, sports, crypto, economics, and arbitrage markets. Paper trading
-                    with 40+ signals detected.</p>
+                <span class="icon">&#x1F43E;</span>
+                <h3>Phoebe Cartoons</h3>
+                <p>Animated shorts starring a sarcastic park ranger dog who roasts visitors without knowing it. Parallax backgrounds, sprite animation.</p>
+                <span class="status active">18 episodes</span>
             </div>
             <div class="card">
-                <div class="icon">📱</div>
+                <span class="icon">&#x1F4F1;</span>
                 <h3>Social Media</h3>
-                <p>Automated posting to X/Twitter, TikTok, YouTube, and Substack via browser automation. Content scored
-                    and auto-approved.</p>
+                <p>Automated posting to X, TikTok, YouTube, and Substack via Playwright browser automation. No API fees.</p>
+                <span class="status active">Active</span>
             </div>
             <div class="card">
-                <div class="icon">🤖</div>
+                <span class="icon">&#x1F4B0;</span>
+                <h3>Affiliate Revenue</h3>
+                <p>Amazon affiliate content across two blogs. SaaS affiliate reviews for recurring commission income.</p>
+                <span class="status building">Building</span>
+            </div>
+            <div class="card">
+                <span class="icon">&#x1F3DB;</span>
+                <h3>Govt Contract Arbitrage</h3>
+                <p>Scanning SAM.gov for micro-purchase supply contracts. Buy retail, sell to government at 50-70% margin.</p>
+                <span class="status planned">Research</span>
+            </div>
+            <div class="card">
+                <span class="icon">&#x1F916;</span>
                 <h3>Agent Orchestration</h3>
-                <p>10 specialized AI agents with defined roles, communication protocols, task verification, and
-                    self-healing infrastructure.</p>
-            </div>
-            <div class="card">
-                <div class="icon">📈</div>
-                <h3>Mission Control</h3>
-                <p>Real-time dashboard tracking agent status, social metrics, trading P&L, and content pipeline. Built
-                    with Next.js.</p>
-            </div>
-            <div class="card">
-                <div class="icon">🔐</div>
-                <h3>Self-Healing Ops</h3>
-                <p>Automated health checks, token refresh, cron monitoring, and agent recovery. The system fixes itself
-                    while you sleep.</p>
+                <p>OpenClaw platform with 8 specialized agents, structured communication, task verification, and cron-based automation.</p>
+                <span class="status active">Active</span>
             </div>
         </div>
     </div>
 
-    <hr class="divider">
+    <hr class="section-divider">
 
-    <!-- The Team -->
-    <div class="section" style="text-align: center;">
-        <h2>The Agent Team</h2>
-        <p class="subtitle">Each agent has a defined role, accountability, and communication channels.</p>
-        <div class="agents">
-            <div class="agent-chip">💰 Jeff <span class="role">President</span></div>
-            <div class="agent-chip">📋 Rio <span class="role">Chief of Staff</span></div>
-            <div class="agent-chip">🎯 Rip <span class="role">Acting CEO</span></div>
-            <div class="agent-chip">⚙️ Rex <span class="role">CTO</span></div>
-            <div class="agent-chip">💵 Red <span class="role">CFO</span></div>
-            <div class="agent-chip">📈 Ria <span class="role">Content</span></div>
-            <div class="agent-chip">🔬 Rea <span class="role">Data</span></div>
-            <div class="agent-chip">🛡️ Reg <span class="role">Engineering</span></div>
-            <div class="agent-chip">📊 Rak <span class="role">Trading</span></div>
-            <div class="agent-chip">⚡ Worker <span class="role">General</span></div>
-        </div>
-    </div>
-
-    <hr class="divider">
-
-    <!-- Links -->
     <div class="section">
-        <h2>Quick Links</h2>
-        <p class="subtitle">Explore the ecosystem.</p>
-        <div class="links-grid">
-            <a class="link-card" href="https://admin.rutroh.org" target="_blank">
-                <div class="link-icon">🎬</div>
-                <div class="link-label">Video Admin</div>
-                <div class="link-desc">admin.rutroh.org</div>
-            </a>
+        <div class="section-header">
+            <h2>The Agent Team</h2>
+            <p>8 agents, defined roles, real accountability.</p>
+        </div>
+        <div class="agent-grid">
+            <div class="agent-chip">
+                <span class="emoji">&#x1F3AF;</span>
+                <div class="info"><span class="name">Rip</span><span class="role">CEO &mdash; Gemini Pro</span></div>
+            </div>
+            <div class="agent-chip">
+                <span class="emoji">&#x1F4CB;</span>
+                <div class="info"><span class="name">Rio</span><span class="role">Chief of Staff</span></div>
+            </div>
+            <div class="agent-chip">
+                <span class="emoji">&#x270D;&#xFE0F;</span>
+                <div class="info"><span class="name">Content</span><span class="role">Writer &amp; Publisher</span></div>
+            </div>
+            <div class="agent-chip">
+                <span class="emoji">&#x1F4B5;</span>
+                <div class="info"><span class="name">Revenue</span><span class="role">Monetization</span></div>
+            </div>
+            <div class="agent-chip">
+                <span class="emoji">&#x1F52C;</span>
+                <div class="info"><span class="name">Research</span><span class="role">Analysis &amp; Intel</span></div>
+            </div>
+            <div class="agent-chip">
+                <span class="emoji">&#x1F3A5;</span>
+                <div class="info"><span class="name">Riz</span><span class="role">Video &amp; Media</span></div>
+            </div>
+            <div class="agent-chip">
+                <span class="emoji">&#x1F6E1;&#xFE0F;</span>
+                <div class="info"><span class="name">Reg</span><span class="role">Engineering</span></div>
+            </div>
+            <div class="agent-chip">
+                <span class="emoji">&#x1F9E0;</span>
+                <div class="info"><span class="name">Rox</span><span class="role">Local AI &mdash; Ollama</span></div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="section">
+        <div class="section-header">
+            <h2>The Experiment</h2>
+            <p>Can a team of AI agents run a real business?</p>
+        </div>
+        <div class="experiment-card">
+            <p>RutRoh started as a question: <strong>What happens if you give AI agents real money, real accounts, and real goals?</strong></p>
+            <p>We&#39;re running an 8-agent AI team on a Mac Mini M4 Pro. They manage social media, generate YouTube videos, research revenue opportunities, write blog posts, and coordinate through a structured mission system. A human approves big spending &#8212; everything else runs autonomously.</p>
+            <p>This isn&#39;t a demo. It&#39;s a live experiment with real money, real social accounts, and real infrastructure running 24/7. Follow along as we document what works, what breaks, and what we learn.</p>
+        </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="section">
+        <div class="section-header">
+            <h2>Connect</h2>
+            <p>Follow the experiment across platforms.</p>
+        </div>
+        <div class="link-grid">
             <a class="link-card" href="https://twitter.com/rohrut_ai" target="_blank">
-                <div class="link-icon">🐦</div>
-                <div class="link-label">X / Twitter</div>
-                <div class="link-desc">@rohrut_ai</div>
+                <span class="icon">&#x1D54F;</span>
+                <div class="label">X / Twitter</div>
+                <div class="desc">@rohrut_ai</div>
             </a>
             <a class="link-card" href="https://www.tiktok.com/@rutroh_ai" target="_blank">
-                <div class="link-icon">🎵</div>
-                <div class="link-label">TikTok</div>
-                <div class="link-desc">@rutroh_ai</div>
-            </a>
-            <a class="link-card" href="https://github.com/Rut304" target="_blank">
-                <div class="link-icon">💻</div>
-                <div class="link-label">GitHub</div>
-                <div class="link-desc">Rut304</div>
+                <span class="icon">&#x1F3B5;</span>
+                <div class="label">TikTok</div>
+                <div class="desc">@rutroh_ai</div>
             </a>
             <a class="link-card" href="https://rutrohd.substack.com" target="_blank">
-                <div class="link-icon">📰</div>
-                <div class="link-label">Substack</div>
-                <div class="link-desc">@rutrohd</div>
+                <span class="icon">&#x1F4F0;</span>
+                <div class="label">Substack</div>
+                <div class="desc">@rutrohd</div>
+            </a>
+            <a class="link-card" href="https://github.com/Rut304" target="_blank">
+                <span class="icon">&#x1F4BB;</span>
+                <div class="label">GitHub</div>
+                <div class="desc">Rut304</div>
             </a>
             <a class="link-card" href="blog/">
-                <div class="link-icon">📝</div>
-                <div class="link-label">Blog</div>
-                <div class="link-desc">AI tools & guides</div>
+                <span class="icon">&#x1F4DD;</span>
+                <div class="label">Blog</div>
+                <div class="desc">AI tools &amp; guides</div>
+            </a>
+            <a class="link-card" href="mailto:rutrohd@gmail.com">
+                <span class="icon">&#x2709;&#xFE0F;</span>
+                <div class="label">Email</div>
+                <div class="desc">rutrohd@gmail.com</div>
             </a>
         </div>
     </div>
 
-    <hr class="divider">
-
-    <!-- The Experiment -->
-    <div class="section">
-        <h2>The Experiment</h2>
-        <p class="subtitle">Can a team of AI agents run a real business?</p>
-        <div class="card-grid" style="grid-template-columns: 1fr;">
-            <div class="card">
-                <p style="font-size: 1rem; line-height: 1.8;">
-                    RutRoh started as a question: <strong>What happens if you give AI agents real money, real accounts,
-                        and real goals?</strong>
-                </p>
-                <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-muted); margin-top: 12px;">
-                    We're running a 10-agent AI team on a Mac Mini M4 Pro. They manage social media, generate YouTube
-                    videos, trade on Kalshi prediction markets, write code, and coordinate with each other through a
-                    structured communication system. A human (Jeff, the President) approves spending over $250 —
-                    everything else is autonomous.
-                </p>
-                <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-muted); margin-top: 12px;">
-                    This isn't a demo. It's a live experiment with real money, real social accounts, and real
-                    infrastructure running 24/7. Follow along as we document what works, what breaks, and what we learn.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025-2026 RutRoh Inc. &nbsp;|&nbsp; Built by AI agents &nbsp;|&nbsp; <a
-                href="mailto:rutrohd@gmail.com">rutrohd@gmail.com</a></p>
+    <footer class="site-footer">
+        <p>&copy; 2025-2026 RutRoh Inc. &middot; Built by AI agents &middot; Guided by humans</p>
     </footer>
 </body>
-
 </html>

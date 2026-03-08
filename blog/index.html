@@ -1,170 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog — RutRoh</title>
+    <meta name="description" content="AI automation, affiliate revenue, and the real story of building an autonomous business.">
     <link rel="icon" type="image/png" href="../assets/logo.png">
-    <style>
-        :root {
-            --bg: #0a0a0f;
-            --surface: #12121a;
-            --border: #1e1e2e;
-            --text: #e0e0e8;
-            --text-muted: #8888a0;
-            --accent: #6c5ce7;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        nav {
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        nav img {
-            height: 28px;
-        }
-
-        nav a {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        h1 {
-            font-size: 1.4rem;
-            margin-bottom: 24px;
-        }
-
-        .post-list {
-            list-style: none;
-        }
-
-        .post-list li {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 16px;
-            transition: border-color 0.2s;
-        }
-
-        .post-list li:hover {
-            border-color: var(--accent);
-        }
-
-        .post-list h3 {
-            font-size: 1rem;
-            margin-bottom: 6px;
-        }
-
-        .post-list .date {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .post-list p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-top: 8px;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
-
 <body>
     <nav>
-        <a href="/"><img src="../assets/rutroh_long_logo.png" alt="RutRoh"></a>
-        <a href="/">Home</a>
-        <a href="/blog/">Blog</a>
+        <a href="/" class="logo">
+            <img src="../assets/rutroh_long_logo.png" alt="RutRoh">
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/blog/" class="active">Blog</a>
+        </div>
     </nav>
-    <div class="container">
+
+    <div class="blog-container">
         <h1>Blog</h1>
+        <p class="desc">Real talk about AI automation, making money with agents, and the tools that actually work.</p>
+
         <ul class="post-list">
             <li>
                 <a href="top-ai-affiliate-programs.html">
+                    <div class="meta">
+                        <span class="date">Mar 7, 2026</span>
+                        <span class="tag">Affiliate</span>
+                    </div>
                     <h3>AI Affiliate Programs That Actually Pay — My Honest Take</h3>
-                    <span class="date">March 7, 2026</span>
-                    <p>Which AI affiliate programs are worth your time and which ones are borderline scams — from
-                        someone who's signed up for a dozen of them.</p>
+                    <p>Which AI affiliate programs are worth your time and which ones are borderline scams.</p>
                 </a>
             </li>
             <li>
                 <a href="home-office-setup-for-ai-developers.html">
-                    <h3>My Actual Home Office Setup for Running Local AI Models (What Worked, What Didn't)</h3>
-                    <span class="date">March 7, 2026</span>
+                    <div class="meta">
+                        <span class="date">Mar 7, 2026</span>
+                        <span class="tag">Setup</span>
+                    </div>
+                    <h3>My Actual Home Office Setup for Running Local AI Models</h3>
                     <p>The gear I actually use every day for running LLMs locally — and the stuff I returned.</p>
                 </a>
             </li>
             <li>
                 <a href="cost-of-running-ai-automated-business.html">
-                    <h3>What I Actually Spend Running an AI-Automated Business (Monthly Breakdown)</h3>
-                    <span class="date">March 7, 2026</span>
-                    <p>A real breakdown of every dollar that goes into running an AI-automated business from a Mac Mini.
-                    </p>
+                    <div class="meta">
+                        <span class="date">Mar 7, 2026</span>
+                        <span class="tag">Business</span>
+                    </div>
+                    <h3>What I Actually Spend Running an AI-Automated Business</h3>
+                    <p>A real breakdown of every dollar that goes into running an AI business from a Mac Mini.</p>
                 </a>
             </li>
             <li>
                 <a href="best-gpu-for-local-ai-2026.html">
+                    <div class="meta">
+                        <span class="date">Mar 7, 2026</span>
+                        <span class="tag">Hardware</span>
+                    </div>
                     <h3>Which GPU Should You Actually Buy for Local AI in 2026?</h3>
-                    <span class="date">March 7, 2026</span>
-                    <p>Real performance numbers, power costs, and honest opinions on which GPUs are worth buying for
-                        local AI work.</p>
+                    <p>Real performance numbers, power costs, and honest opinions on which GPUs are worth it.</p>
                 </a>
             </li>
             <li>
                 <a href="tech-gadgets-under-50.html">
+                    <div class="meta">
+                        <span class="date">Mar 6, 2026</span>
+                        <span class="tag">Gadgets</span>
+                    </div>
                     <h3>3 Cheap Tech Buys I Actually Use Every Day</h3>
-                    <span class="date">March 6, 2026</span>
-                    <p>Gadgets under $50 that survived daily use in a home AI lab — with real complaints included.</p>
+                    <p>Gadgets under $50 that survived daily use in a home AI lab — with real complaints.</p>
                 </a>
             </li>
             <li>
                 <a href="ai-agents-making-money.html">
+                    <div class="meta">
+                        <span class="date">Mar 1, 2026</span>
+                        <span class="tag">Revenue</span>
+                    </div>
                     <h3>How AI Agents Made $358 While I Slept (And You Can Too)</h3>
-                    <span class="date">March 1, 2026</span>
                     <p>The experiment that kicked everything off — giving AI agents real money and real goals.</p>
                 </a>
             </li>
             <li>
                 <a href="ai-tools-2026.html">
+                    <div class="meta">
+                        <span class="date">Feb 28, 2026</span>
+                        <span class="tag">Tools</span>
+                    </div>
                     <h3>Best AI Tools for 2026: The Ultimate Guide</h3>
-                    <span class="date">February 28, 2026</span>
-                    <p>Our tested and reviewed guide to the best AI tools for productivity, coding, and creative work in
-                        2026.</p>
+                    <p>Tested and reviewed guide to the best AI tools for productivity, coding, and creative work.</p>
                 </a>
             </li>
         </ul>
     </div>
-</body>
 
+    <footer class="site-footer">
+        <p>&copy; 2026 RutRoh Inc. &middot; AI-Powered, Human-Guided</p>
+    </footer>
+</body>
 </html>
