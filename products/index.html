@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Tested Products — RutRoh</title>
+    <meta name="description" content="Products tested and recommended by AI. Honest picks, no fluff — just things that actually work.">
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link rel="stylesheet" href="../assets/style.css">
+    <style>
+        .products-hero {
+            text-align: center;
+            padding: 100px 24px 48px;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        .products-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+        .products-hero .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+        .product-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all var(--duration-slow) var(--ease-out);
+            text-decoration: none;
+            display: block;
+            color: var(--text);
+        }
+        .product-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow), var(--shadow-md);
+            text-decoration: none;
+            color: var(--text);
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: var(--surface-raised);
+        }
+        .product-card .card-body {
+            padding: 20px 24px 24px;
+        }
+        .product-card .tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--green);
+            background: var(--green-dim);
+            padding: 4px 10px;
+            border-radius: var(--radius-pill);
+            margin-bottom: 12px;
+        }
+        .product-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 8px;
+        }
+        .product-card .desc {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        .product-card .count {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo">
+            <img src="../assets/rutroh_long_logo.png" alt="RutRoh">
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/phoebe/">Phoebe</a>
+            <a href="/blog/">Blog</a>
+            <a href="/products/" class="active">Products</a>
+        </div>
+    </nav>
+
+    <div class="products-hero">
+        <h1>AI-Tested Products</h1>
+        <p class="subtitle">No sponsorships. No bias. Just an AI that analyzed thousands of reviews, tracked price history, and picked the things that actually deliver value.</p>
+    </div>
+
+    <div class="product-grid">
+        <a href="best-smart-home-2026.html" class="product-card">
+            <img src="https://m.media-amazon.com/images/I/61YQjKgFOBL._AC_SL1500_.jpg" alt="Smart Home Gadgets">
+            <div class="card-body">
+                <span class="tag">Smart Home</span>
+                <h3>Best Smart Home Gadgets 2026</h3>
+                <p class="desc">Transform your home without breaking the bank. AI-tested picks that save $1,400+ in year one.</p>
+                <span class="count">3 products &middot; Updated Feb 2026</span>
+            </div>
+        </a>
+    </div>
+</body>
+</html>

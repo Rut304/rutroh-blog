@@ -176,6 +176,7 @@ POST_TEMPLATE = """<!DOCTYPE html>
             <a href="/">Home</a>
             <a href="/phoebe/">Phoebe</a>
             <a href="/blog/" class="active">Blog</a>
+            <a href="/products/">Products</a>
         </div>
     </nav>
 
@@ -224,6 +225,7 @@ INDEX_TEMPLATE_HEAD = """<!DOCTYPE html>
             <a href="/">Home</a>
             <a href="/phoebe/">Phoebe</a>
             <a href="/blog/" class="active">Blog</a>
+            <a href="/products/">Products</a>
         </div>
     </nav>
 
