@@ -1,91 +1,126 @@
 #!/usr/bin/env python3
-"""Convert Markdown posts in _posts/ to HTML files in blog/"""
-import os, re, glob
+"""
+Build blog — converts _posts/*.md to blog/*.html and regenerates blog/index.html.
+Uses the shared stylesheet (assets/style.css) and consistent site-wide nav/footer.
+
+Usage: python3 build_blog.py
+"""
+import html as html_mod
+import math
+import os
+import re
+import glob
 from datetime import datetime
 
 
+# ---------------------------------------------------------------------------
+# Markdown → HTML converter
+# ---------------------------------------------------------------------------
+
 def md_to_html(text):
-    """Simple markdown to HTML converter for blog posts."""
+    """Convert markdown body text to HTML."""
     lines = text.split('\n')
-    html_lines = []
+    out = []
     in_list = False
     list_type = None
+    in_code_block = False
+    code_lines = []
 
     for line in lines:
         stripped = line.strip()
 
+        # Fenced code blocks
+        if stripped.startswith('```'):
+            if in_code_block:
+                out.append('<pre><code>' + html_mod.escape('\n'.join(code_lines)) + '</code></pre>')
+                code_lines = []
+                in_code_block = False
+            else:
+                if in_list:
+                    out.append(f'</{list_type}>')
+                    in_list = False
+                    list_type = None
+                in_code_block = True
+            continue
+
+        if in_code_block:
+            code_lines.append(line)
+            continue
+
         # Blank line
         if not stripped:
             if in_list:
-                html_lines.append(f'</{list_type}>')
+                out.append(f'</{list_type}>')
                 in_list = False
                 list_type = None
-            html_lines.append('')
+            out.append('')
             continue
 
         # Headers
-        if stripped.startswith('### '):
-            if in_list:
-                html_lines.append(f'</{list_type}>')
-                in_list = False
-            html_lines.append(f'<h3>{inline(stripped[4:])}</h3>')
-            continue
-        if stripped.startswith('## '):
-            if in_list:
-                html_lines.append(f'</{list_type}>')
-                in_list = False
-            html_lines.append(f'<h2>{inline(stripped[3:])}</h2>')
-            continue
-        if stripped.startswith('# '):
-            if in_list:
-                html_lines.append(f'</{list_type}>')
-                in_list = False
-            html_lines.append(f'<h1>{inline(stripped[2:])}</h1>')
-            continue
-
-        # Horizontal rule
-        if stripped in ('---', '***', '___'):
-            html_lines.append('<hr>')
-            continue
-
-        # Unordered list
-        if re.match(r'^[-*]\s', stripped):
-            if not in_list or list_type != 'ul':
+        for level, prefix in [(3, '### '), (2, '## '), (1, '# ')]:
+            if stripped.startswith(prefix):
                 if in_list:
-                    html_lines.append(f'</{list_type}>')
-                html_lines.append('<ul>')
-                in_list = True
-                list_type = 'ul'
-            html_lines.append(f'<li>{inline(stripped[2:])}</li>')
-            continue
+                    out.append(f'</{list_type}>')
+                    in_list = False
+                out.append(f'<h{level}>{inline(stripped[len(prefix):])}</h{level}>')
+                break
+        else:
+            # Horizontal rule
+            if stripped in ('---', '***', '___'):
+                out.append('<hr>')
+                continue
 
-        # Ordered list
-        m = re.match(r'^(\d+)\.\s', stripped)
-        if m:
-            if not in_list or list_type != 'ol':
+            # Unordered list
+            if re.match(r'^[-*]\s', stripped):
+                if not in_list or list_type != 'ul':
+                    if in_list:
+                        out.append(f'</{list_type}>')
+                    out.append('<ul>')
+                    in_list = True
+                    list_type = 'ul'
+                out.append(f'<li>{inline(stripped[2:])}</li>')
+                continue
+
+            # Ordered list
+            m = re.match(r'^(\d+)\.\s', stripped)
+            if m:
+                if not in_list or list_type != 'ol':
+                    if in_list:
+                        out.append(f'</{list_type}>')
+                    out.append('<ol>')
+                    in_list = True
+                    list_type = 'ol'
+                out.append(f'<li>{inline(stripped[len(m.group(0)):])}</li>')
+                continue
+
+            # Blockquote
+            if stripped.startswith('> '):
                 if in_list:
-                    html_lines.append(f'</{list_type}>')
-                html_lines.append('<ol>')
-                in_list = True
-                list_type = 'ol'
-            html_lines.append(f'<li>{inline(stripped[len(m.group(0)):])}</li>')
-            continue
+                    out.append(f'</{list_type}>')
+                    in_list = False
+                    list_type = None
+                out.append(f'<blockquote>{inline(stripped[2:])}</blockquote>')
+                continue
 
-        # Regular paragraph
-        if in_list:
-            html_lines.append(f'</{list_type}>')
-            in_list = False
-            list_type = None
-        html_lines.append(f'<p>{inline(stripped)}</p>')
+            # Regular paragraph
+            if in_list:
+                out.append(f'</{list_type}>')
+                in_list = False
+                list_type = None
+            out.append(f'<p>{inline(stripped)}</p>')
 
     if in_list:
-        html_lines.append(f'</{list_type}>')
+        out.append(f'</{list_type}>')
+    if in_code_block:
+        out.append('<pre><code>' + html_mod.escape('\n'.join(code_lines)) + '</code></pre>')
 
-    return '\n'.join(html_lines)
+    return '\n'.join(out)
 
 
 def inline(text):
-    """Convert inline markdown: bold, italic, links, code."""
+    """Convert inline markdown: bold, italic, links, code, images."""
+    # Images: ![alt](url)
+    text = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', r'<img src="\2" alt="\1">', text)
     # Links: [text](url)
     text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', text)
     # Bold: **text**
@@ -96,71 +131,122 @@ def inline(text):
     text = re.sub(r'`(.+?)`', r'<code>\1</code>', text)
     return text
 
-TEMPLATE_HEAD = """<!DOCTYPE html>
+
+def reading_time(text):
+    """Estimate reading time in minutes."""
+    words = len(text.split())
+    return max(1, math.ceil(words / 250))
+
+
+def extract_tag(categories):
+    """Pick a short display tag from categories list."""
+    tag_map = {
+        'ai': 'AI', 'business': 'Business', 'automation': 'Automation',
+        'hardware': 'Hardware', 'affiliate': 'Affiliate', 'gadgets': 'Gadgets',
+        'setup': 'Setup', 'review': 'Review', 'tools': 'Tools',
+        'revenue': 'Revenue',
+    }
+    for cat in categories:
+        key = cat.strip().lower()
+        if key in tag_map:
+            return tag_map[key]
+    return categories[0].strip() if categories else 'Post'
+
+
+# ---------------------------------------------------------------------------
+# Templates — uses shared assets/style.css
+# ---------------------------------------------------------------------------
+
+POST_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TITLE_PLACEHOLDER — RutRoh Blog</title>
+    <title>{title} &mdash; RutRoh Blog</title>
+    <meta name="description" content="{description}">
     <link rel="icon" type="image/png" href="../assets/logo.png">
-    <style>
-        :root {
-            --bg: #0a0a0f;
-            --surface: #12121a;
-            --border: #1e1e2e;
-            --text: #e0e0e8;
-            --text-muted: #8888a0;
-            --accent: #6c5ce7;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.8;
-        }
-        a { color: var(--accent); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        nav {
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        nav img { height: 28px; }
-        nav a { color: var(--text-muted); font-size: 0.85rem; }
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 40px 20px 80px;
-        }
-        h1 { font-size: 1.6rem; margin-bottom: 8px; }
-        .date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 32px; display: block; }
-        h2 { font-size: 1.2rem; margin: 32px 0 12px; }
-        h3 { font-size: 1.05rem; margin: 24px 0 8px; }
-        p { margin-bottom: 16px; color: var(--text-muted); }
-        strong { color: var(--text); }
-        ol, ul { margin: 0 0 16px 24px; color: var(--text-muted); }
-        li { margin-bottom: 6px; }
-        hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-        em { color: var(--text-muted); font-size: 0.85rem; }
-    </style>
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
     <nav>
-        <a href="/"><img src="../assets/rutroh_long_logo.png" alt="RutRoh"></a>
-        <a href="/">Home</a>
-        <a href="/blog/">Blog</a>
+        <a href="/" class="logo">
+            <img src="../assets/rutroh_long_logo.png" alt="RutRoh">
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/phoebe/">Phoebe</a>
+            <a href="/blog/" class="active">Blog</a>
+        </div>
     </nav>
-    <div class="container">
-        <h1>TITLE_PLACEHOLDER</h1>
-        <span class="date">DATE_PLACEHOLDER</span>
-"""
 
-TEMPLATE_FOOT = """    </div>
+    <div class="article-container">
+        <div class="article-header">
+            <h1>{title}</h1>
+            <div class="article-meta">
+                <span class="date">{date}</span>
+                <span class="author">RutRoh AI</span>
+                <span class="reading-time">{read_time} min read</span>
+            </div>
+        </div>
+
+        <div class="article-body">
+{body}
+        </div>
+
+        <div class="article-footer">
+            <a class="back-link" href="/blog/">&larr; All posts</a>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2025-2026 RutRoh Inc.</p>
+    </footer>
 </body>
 </html>"""
+
+
+INDEX_TEMPLATE_HEAD = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog &mdash; RutRoh</title>
+    <meta name="description" content="AI automation, affiliate revenue, and the real story of building an autonomous business.">
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo">
+            <img src="../assets/rutroh_long_logo.png" alt="RutRoh">
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/phoebe/">Phoebe</a>
+            <a href="/blog/" class="active">Blog</a>
+        </div>
+    </nav>
+
+    <div class="blog-container">
+        <h1>Blog</h1>
+        <p class="desc">Real talk about AI automation, making money with agents, and the tools that actually work.</p>
+
+        <ul class="post-list">
+"""
+
+INDEX_TEMPLATE_FOOT = """        </ul>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2025-2026 RutRoh Inc.</p>
+    </footer>
+</body>
+</html>"""
+
+
+# ---------------------------------------------------------------------------
+# Build
+# ---------------------------------------------------------------------------
 
 posts = sorted(glob.glob('_posts/*.md'))
 all_posts = []
@@ -171,6 +257,8 @@ for path in posts:
 
     title = ''
     date_str = ''
+    categories = []
+
     if content.startswith('---'):
         parts = content.split('---', 2)
         fm = parts[1]
@@ -186,6 +274,9 @@ for path in posts:
                 date_str = dt.strftime('%B %d, %Y')
             except Exception:
                 date_str = raw[:10]
+        m = re.search(r'categories:\s*\[(.+?)\]', fm)
+        if m:
+            categories = [c.strip() for c in m.group(1).split(',')]
     else:
         body = content.strip()
         for line in body.split('\n'):
@@ -197,34 +288,63 @@ for path in posts:
 
     fname = os.path.basename(path)
     slug = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', fname.replace('.md', ''))
-
+    read_time = reading_time(body)
     html_body = md_to_html(body)
 
-    page = TEMPLATE_HEAD.replace('TITLE_PLACEHOLDER', title).replace('DATE_PLACEHOLDER', date_str)
-    page += html_body + '\n' + TEMPLATE_FOOT
+    # First non-header paragraph as description
+    desc = ''
+    for line in body.split('\n'):
+        line = line.strip()
+        if line and not line.startswith('#') and not line.startswith('*') and not line.startswith('---') and not line.startswith('>'):
+            desc = line[:160]
+            if len(line) > 160:
+                desc += '...'
+            break
+
+    page = POST_TEMPLATE.format(
+        title=html_mod.escape(title),
+        description=html_mod.escape(desc),
+        date=date_str,
+        read_time=read_time,
+        body=html_body,
+    )
 
     outpath = f'blog/{slug}.html'
     with open(outpath, 'w') as f:
         f.write(page)
-
-    print(f'Created: {outpath}')
-
-    desc = ''
-    for line in body.split('\n'):
-        line = line.strip()
-        if line and not line.startswith('#') and not line.startswith('*') and not line.startswith('---'):
-            desc = line[:150]
-            if len(line) > 150:
-                desc += '...'
-            break
+    print(f'  {outpath}')
 
     all_posts.append({
         'slug': slug,
         'title': title or slug.replace('-', ' ').title(),
         'date_str': date_str,
         'desc': desc,
+        'tag': extract_tag(categories),
     })
 
-print('\n--- All posts (oldest to newest) ---')
+# ---------------------------------------------------------------------------
+# Generate blog/index.html (newest first)
+# ---------------------------------------------------------------------------
+
+all_posts.reverse()
+
+index_html = INDEX_TEMPLATE_HEAD
 for p in all_posts:
-    print(f"{p['slug']} | {p['title']} | {p['date_str']}")
+    index_html += f"""            <li>
+                <a href="{p['slug']}.html">
+                    <div class="meta">
+                        <span class="date">{p['date_str']}</span>
+                        <span class="tag">{p['tag']}</span>
+                    </div>
+                    <h3>{html_mod.escape(p['title'])}</h3>
+                    <p>{html_mod.escape(p['desc'])}</p>
+                </a>
+            </li>
+"""
+index_html += INDEX_TEMPLATE_FOOT
+
+with open('blog/index.html', 'w') as f:
+    f.write(index_html)
+
+print(f'\n  blog/index.html ({len(all_posts)} posts)')
+print(f'\nDone — {len(all_posts)} posts built.')
