@@ -115,7 +115,7 @@ nav .logo:hover img { opacity: 1; }
 
 nav .nav-links { display: flex; gap: 4px; margin-left: auto; }
 nav .nav-links a {
-    color: var(--text-muted);
+    color: var(--text-secondary);
     font-size: 0.82rem;
     font-weight: 500;
     padding: 7px 14px;

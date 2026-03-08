@@ -271,6 +271,49 @@
             }
         }
 
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-actions a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: var(--radius-pill);
+            transition: all var(--duration) var(--ease-out);
+            text-decoration: none;
+        }
+        .hero-actions .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 4px 24px rgba(129,140,248,0.25);
+        }
+        .hero-actions .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 32px rgba(129,140,248,0.35);
+            color: #fff;
+        }
+        .hero-actions .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .hero-actions .btn-secondary:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            color: var(--text);
+        }
+
         @media (max-width: 480px) {
             .agent-grid {
                 grid-template-columns: 1fr;
@@ -279,6 +322,7 @@
             .link-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .hero-actions a { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -303,6 +347,11 @@
         <p class="subtitle">8 AI agents running content, video, research, and revenue systems on a Mac Mini M4 Pro.
             24/7. For real.</p>
         <div class="badge">agents online &mdash; systems operational</div>
+        <div class="hero-actions">
+            <a href="/phoebe/" class="btn-primary">&#x1F43E; Watch Phoebe</a>
+            <a href="/blog/" class="btn-secondary">&#x1F4DD; Read the Blog</a>
+            <a href="https://twitter.com/rohrut_ai" target="_blank" class="btn-secondary">&#x1D54F; Follow on X</a>
+        </div>
     </div>
 
     <div class="section">
